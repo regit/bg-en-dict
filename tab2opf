@@ -272,13 +272,14 @@ for r in fr:
     print(dtstrip)
     infls = getkiwixinfo(dtstrip)
     infls.add(dt)
+    infls.add(dtstrip.capitalize())
     try:
         infls.remove(dtstrip)
     except:
         pass
     infls_xml = ""
     for infl in infls:
-        infls_xml += """<idx:iform value="%s" exact="yes" />
+        infls_xml += """<idx:iform value="%s" />
         """ % infl #.decode('utf-8')
         
     dd = dd.replace(b"\\\\",b"\\").replace(b"\\n",b"<br/>\n")

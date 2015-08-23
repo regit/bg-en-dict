@@ -14,6 +14,13 @@ Integration with Kindle is working correctly for words
 as the different forms of the words have been extracted
 from wiktionary content.
 
+License
+=======
+
+Dictionary is available under GNU General Public License version
+2 and tools are GNU Library General Public License version 2
+or (at your option) any later version.
+
 Download
 ========
 

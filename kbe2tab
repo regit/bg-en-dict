@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this library; if not, write to the
+# Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+# Boston, MA 02111-1307, USA.
+
+import re
+import sys
+
+
+if len(sys.argv) != 3:
+    print("Needs KBE input file and TAB output file as argument")
+    sys.exit(-1)
+
+f = open(sys.argv[1], 'rb')
+out = open(sys.argv[2], 'w')
+
+dico = f.read()
+
+word_start = 0
+word_end = 0
+word_list = []
+for i in range(len(dico)):
+    if dico[i] == 0:
+        word_end = i
+        if word_end > 1:
+            word_list.append(dico[word_start:word_end - 1])
+        word_start = word_end + 1
+
+for entry in word_list:
+    entry_parts = entry.decode('cp1251').split('\n', 1)
+    if len(entry_parts) == 2:
+        #print(entry_parts[0])
+        out.write(entry_parts[0])
+        out.write('\t')
+        out.write(entry_parts[1].replace('\n','\\n'))
+        out.write('\n')
